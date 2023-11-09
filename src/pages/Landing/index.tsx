@@ -1,6 +1,5 @@
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { RectButton } from "react-native-gesture-handler";
 
 import landingImg from "../../assets/images/landing.png";
 import studyIcon from "../../assets/images/icons/study.png";
@@ -26,20 +25,20 @@ export function Landing() {
       </Text>
 
       <View style={styles.buttonsContainer}>
-        <RectButton style={[styles.button, styles.buttonPrimary]}>
+        <TouchableOpacity style={[styles.button, styles.buttonPrimary]}>
           <Image source={studyIcon} />
 
           <Text style={styles.buttonText}>Aluno</Text>
-        </RectButton>
+        </TouchableOpacity>
 
-        <RectButton
+        <TouchableOpacity
           onPress={handleNavigateToGiveClassesPage}
           style={[styles.button, styles.buttonSecondary]}
         >
           <Image source={giveClassesIcon} />
 
           <Text style={styles.buttonText}>Professor</Text>
-        </RectButton>
+        </TouchableOpacity>
       </View>
 
       <Text style={styles.totalConnections}>
