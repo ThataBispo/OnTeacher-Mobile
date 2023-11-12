@@ -1,12 +1,16 @@
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
 
 import giveClassesBgImage from "../../assets/images/give-classes-background.png";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
-export function GiveClasesses() {
-  const navigation = useNavigation();
+export function GiveClasses() {
+  const { goBack } = useNavigation();
+
+  function handleNavigateBack() {
+    goBack();
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -21,7 +25,7 @@ export function GiveClasesses() {
         </Text>
       </ImageBackground>
 
-      <TouchableOpacity style={styles.okButton}>
+      <TouchableOpacity onPress={handleNavigateBack} style={styles.okButton}>
         <Text style={styles.okButtonText}>Vamos lá</Text>
       </TouchableOpacity>
     </View>
