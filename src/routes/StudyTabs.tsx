@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
-import { TeacherList } from "../pages/TeacherList";
+import { Heart, Student } from "phosphor-react-native";
 import { Favorites } from "../pages/Favorites";
+import { TeacherList } from "../pages/TeacherList";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -18,7 +18,7 @@ export function StudyTabs() {
         tabBarStyle: {
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
         },
         tabBarIconStyle: {
           flex: 0,
@@ -26,14 +26,15 @@ export function StudyTabs() {
           justifyContent: "center",
         },
 
-        tabBarLabelStyle: {
-          fontFamily: "Archivo_700Bold",
-          fontSize: 13,
-          marginLeft: 16,
-        },
+        // tabBarLabelStyle: {
+        //   fontFamily: "Archivo_700Bold",
+        //   fontSize: 13,
+        //   marginLeft: 16,
+        // },
+        tabBarShowLabel: false,
         headerShown: false,
-        tabBarInactiveBackgroundColor: "#fafafc",
-        tabBarActiveBackgroundColor: "#ebebf5",
+        // tabBarInactiveBackgroundColor: "#fafafc",
+        // tabBarActiveBackgroundColor: "#ebebf5",
         tabBarInactiveTintColor: "#c1bccc",
         tabBarActiveTintColor: "#32264d",
       }}
@@ -42,20 +43,29 @@ export function StudyTabs() {
         name="TeacherList"
         component={TeacherList}
         options={{
-          tabBarLabel: "Professores",
-          tabBarIcon: ({ color, size }) => {
-            return <Ionicons name="ios-easel" size={size} color={color} />;
+          tabBarIcon: ({ color, size, focused }) => {
+            return (
+              <Student
+                size={size}
+                color={focused ? "#8257e5" : color}
+                weight={focused ? "fill" : "light"}
+              />
+            );
           },
         }}
       />
+
       <Screen
         name="Favorites"
         component={Favorites}
         options={{
-          tabBarLabel: "Favoritos",
-          tabBarIcon: ({ color, size }) => {
-            return <Ionicons name="ios-heart" size={size} color={color} />;
-          },
+          tabBarIcon: ({ color, size, focused }) => (
+            <Heart
+              size={size}
+              color={focused ? "#8257e5" : color}
+              weight={focused ? "fill" : "light"}
+            />
+          ),
         }}
       />
     </Navigator>

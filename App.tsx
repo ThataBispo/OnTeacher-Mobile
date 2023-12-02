@@ -1,7 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { Landing } from "./src/pages/Landing";
 import AppLoading from "expo-app-loading";
+import { StatusBar } from "expo-status-bar";
 import { AppStack } from "./src/routes/AppStack";
 
 import {
@@ -14,6 +12,7 @@ import {
   Poppins_600SemiBold,
   useFonts,
 } from "@expo-google-fonts/poppins";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -27,10 +26,10 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <AppStack />
         <StatusBar style="light" />
-      </>
+      </GestureHandlerRootView>
     );
   }
 }

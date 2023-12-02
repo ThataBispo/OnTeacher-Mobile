@@ -1,4 +1,3 @@
-import { Poppins_600SemiBold } from "@expo-google-fonts/poppins";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -49,7 +48,11 @@ export const styles = StyleSheet.create({
     backgroundColor: "#04d361",
   },
 
-  buttonText: { fontFamily: "Archivo_700Bold", color: "FFF", fontSize: 20 },
+  buttonText: {
+    fontFamily: "Archivo_700Bold",
+    color: "#FFF",
+    fontSize: 20,
+  },
 
   totalConnections: {
     fontFamily: "Poppins_400Regular",
