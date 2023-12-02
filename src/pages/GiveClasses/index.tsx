@@ -1,8 +1,9 @@
-import { View, ImageBackground, Text, TouchableOpacity } from "react-native";
+import { View, ImageBackground, Text } from "react-native";
 
 import giveClassesBgImage from "../../assets/images/give-classes-background.png";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export function GiveClasses() {
   const { goBack } = useNavigation();
