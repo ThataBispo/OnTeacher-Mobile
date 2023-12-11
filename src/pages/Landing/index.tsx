@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 import { styles } from "./styles";
@@ -8,9 +8,19 @@ import giveClassesIcon from "../../assets/images/icons/give-classes.png";
 import heartIcon from "../../assets/images/icons/heart.png";
 import studyIcon from "../../assets/images/icons/study.png";
 import LandingImg from "../../assets/images/landing.svg";
+import api from "../../services/api";
 
 export function Landing() {
   const { navigate } = useNavigation();
+  const [totalConnections, setTotalConnections] = useState(0);
+
+  useEffect(() => {
+    api.get("connections").then((response) => {
+      const { total } = response.data;
+
+      setTotalConnections(total);
+    });
+  }, []);
 
   function handleNavigateToGiveClassesPage() {
     navigate("GiveClasses");
@@ -50,7 +60,8 @@ export function Landing() {
       </View>
 
       <Text style={styles.totalConnections}>
-        Total de 10 conexões já realizadas <Image source={heartIcon} />
+        Total de {totalConnections} conexões já realizadas{" "}
+        <Image source={heartIcon} />
       </Text>
     </View>
   );

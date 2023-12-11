@@ -1,7 +1,15 @@
 import { Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { ScrollView, Text, TextInput, View } from "react-native";
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { BorderlessButton, RectButton } from "react-native-gesture-handler";
+import { Picker } from "@react-native-picker/picker"; // Importe o Picker
 
 import { PageHeader } from "../../components/PageHeader";
 import { Teacher, TeacherItem } from "../../components/TeacherItem";
@@ -18,7 +26,7 @@ export function TeacherList() {
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
   const [subject, setSubject] = useState("");
-  const [week_day, setWeekDay] = useState("");
+  const [weekDay, setWeekDay] = useState(""); // Renomeie para weekDay
   const [time, setTime] = useState("");
 
   function loadFavorites() {
@@ -50,7 +58,7 @@ export function TeacherList() {
     const response = await api.get("classes", {
       params: {
         subject,
-        week_day,
+        week_day: Number(weekDay), // Converte para número
         time,
       },
     });
@@ -70,7 +78,10 @@ export function TeacherList() {
         }
       >
         {isFiltersVisible && (
-          <View style={styles.searchForm}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.searchForm}
+          >
             <Text style={styles.label}>Matéria</Text>
             <TextInput
               style={styles.input}
@@ -83,13 +94,21 @@ export function TeacherList() {
             <View style={styles.inputGroup}>
               <View style={styles.inputBlock}>
                 <Text style={styles.label}>Dia da semana</Text>
-                <TextInput
+                <Picker
                   style={styles.input}
-                  value={week_day}
-                  onChangeText={(text) => setWeekDay(text)}
-                  placeholder="Qual o dia?"
-                  placeholderTextColor="#c1bccc"
-                />
+                  selectedValue={weekDay}
+                  onValueChange={(itemValue) =>
+                    setWeekDay(itemValue.toString())
+                  }
+                >
+                  <Picker.Item color="red" label="Domingo" value="0" />
+                  <Picker.Item label="Segunda-feira" value="1" />
+                  <Picker.Item label="Terça-feira" value="2" />
+                  <Picker.Item label="Quarta-feira" value="3" />
+                  <Picker.Item label="Quinta-feira" value="4" />
+                  <Picker.Item label="Sexta-feira" value="5" />
+                  <Picker.Item label="Sábado" value="6" />
+                </Picker>
               </View>
 
               <View style={styles.inputBlock}>
@@ -110,7 +129,7 @@ export function TeacherList() {
             >
               <Text style={styles.submitButtonText}>Filtrar</Text>
             </RectButton>
-          </View>
+          </KeyboardAvoidingView>
         )}
       </PageHeader>
 

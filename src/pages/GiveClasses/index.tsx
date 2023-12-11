@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
 import giveClassesBgImage from "../../assets/images/give-classes-background.png";
 import { styles } from "./styles";
+import { RectButton } from "react-native-gesture-handler";
 
 export function GiveClasses() {
   const { goBack } = useNavigation();
@@ -19,16 +20,16 @@ export function GiveClasses() {
         source={giveClassesBgImage}
         style={styles.content}
       >
-        <Text style={styles.title}>Quer dar aulas?</Text>
+        <Text style={styles.title}>Quer ser um Proffy?</Text>
         <Text style={styles.description}>
           Para começar, você precisa se cadastrar como professor na nossa
           plataforma web.
         </Text>
       </ImageBackground>
 
-      <TouchableOpacity onPress={handleNavigateBack} style={styles.okButton}>
-        <Text style={styles.okButtonText}>Vamos lá</Text>
-      </TouchableOpacity>
+      <RectButton onPress={handleNavigateBack} style={styles.okButton}>
+        <Text style={styles.okButtonText}>Tudo bem</Text>
+      </RectButton>
     </View>
   );
 }
